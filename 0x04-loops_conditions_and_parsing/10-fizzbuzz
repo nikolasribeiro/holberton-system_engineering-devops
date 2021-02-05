@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+for ((COUNTER = 1; COUNTER <= 100; COUNTER++)); do
+    if [ $(( COUNTER % 3)) == 0 ] && [ $(( COUNTER % 5)) == 0 ]; then
+        echo "FizzBuzz"
+    elif [ $(( COUNTER % 5)) == 0 ]; then
+        echo "Buzz"
+    elif [ $(( COUNTER % 3)) == 0 ]; then
+        echo "Fizz"
+    else
+        echo "$COUNTER"
+    fi
+done

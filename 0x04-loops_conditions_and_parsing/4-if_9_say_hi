@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Write a Bash script that displays Holberton School 10 times, but for the 9th iteration, displays Hi
+
+COUNTER=1
+while [ $COUNTER -le 10 ]; do
+    echo "Holberton School"
+    if [ $COUNTER == 9 ]; then
+        echo "Hi"
+    fi
+    COUNTER=$((COUNTER+1))
+done

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+COUNTER=1
+
+while [ $COUNTER -le 10 ]; do
+    if [ $COUNTER == 4 ]; then
+        echo "bad luck"
+    fi
+
+    if [ $COUNTER == 8 ]; then
+        echo "good luck"
+    fi
+
+    echo "Holberton School"
+    COUNTER=$((COUNTER+1))
+done

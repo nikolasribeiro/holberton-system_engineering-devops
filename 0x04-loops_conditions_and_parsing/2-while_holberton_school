@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script is displaying "Holberton School" 10 times with while loop
+LIMIT="1"
+while [ $LIMIT -lt 10 ]; do
+    echo "Holberton School"
+    LIMIT=$((LIMIT+1))
+done
