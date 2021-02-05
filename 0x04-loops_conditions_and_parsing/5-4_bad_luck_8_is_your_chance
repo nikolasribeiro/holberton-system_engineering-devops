@@ -3,11 +3,11 @@
 COUNTER=1
 
 while [ $COUNTER -le 10 ]; do
-    if [ $COUNTER == 4 ]; then
+    if [ $COUNTER == 3 ]; then
         echo "bad luck"
     fi
 
-    if [ $COUNTER == 8 ]; then
+    if [ $COUNTER == 7 ]; then
         echo "good luck"
     fi
 
