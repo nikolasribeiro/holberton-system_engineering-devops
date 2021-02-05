@@ -3,19 +3,24 @@
 COUNTER=1
 
 while [ $COUNTER -le 20 ]; do
-    echo $COUNTER
-    
-    if [ $COUNTER == 4 ]; then
+    case "$COUNTER" in
+
+    4)
+        echo "$COUNTER"
         echo "bad luck from China"
-    fi
+        ;;
 
-    if [ $COUNTER == 9 ]; then
-        echo "good luck from Japan"
-    fi
+    9)
+        echo "$COUNTER"
+        echo "bad luck from Japan"
+        ;;
 
-    if [ $COUNTER == 17 ]; then
-        echo "good luck from Italy"
-    fi
-    
+    17)
+        echo "$COUNTER"
+        echo "bad luck from Italy"
+        ;;
+    *)
+        echo "$COUNTER"
+    esac
     COUNTER=$((COUNTER+1))
 done
