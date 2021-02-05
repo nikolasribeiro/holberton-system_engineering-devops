@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script is displaying "Holberton School" 10 times
 
 for ((COUNTER = 1; COUNTER <= 100; COUNTER++)); do
     if [ $(( COUNTER % 3)) == 0 ] && [ $(( COUNTER % 5)) == 0 ]; then
