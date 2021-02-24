@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#ifconfig is going to be deprecated but if this works, its ok for me
+ifconfig | grep "inet addr:" | cut -d ":" -f 2 | cut -d " " -f 1
