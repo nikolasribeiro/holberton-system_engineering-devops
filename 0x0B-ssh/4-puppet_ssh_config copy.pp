@@ -1,12 +1,10 @@
-# a comment
-include stdlib
-
-file_line { 'private key':
-  path   => '/etc/ssh/ssh_config',
-  line   => 'IdentityFile ~/.ssh/holberton',
+# Client configuration file (w/ Puppet)
+file_line { 'Turn off passwd auth':
+  path  => '/etc/ssh/ssh_config',
+  line  => '    PasswordAuthentication no',
+  match => 'PasswordAuthentication yes',
 }
-
-file_line { 'refuse to authenticate':
-  path   => '/etc/ssh/ssh_config',
-  line   => 'PasswordAuthentication no',
+file_line { 'Declare identity file':
+  path => "/etc/ssh/ssh_config",
+  line => '    IdentityFile ~/.ssh/holberton',
 }
