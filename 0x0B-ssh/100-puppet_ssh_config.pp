@@ -1,6 +1,12 @@
-# modify ssh config file
-exec {'/etc/ssh/ssh_config':
-  path     => '/bin',
-  command  => 'echo "    IdentityFile ~/.ssh/holberton\n    PasswordAuthentication no" >> /etc/ssh/ssh_config',
-  provider => 'shell',
+# a comment
+include stdlib
+
+file_line { 'private key':
+  path   => '/etc/ssh/ssh_config',
+  line   => 'IdentityFile ~/.ssh/holberton',
+}
+
+file_line { 'refuse to authenticate':
+  path   => '/etc/ssh/ssh_config',
+  line   => 'PasswordAuthentication no',
 }
