@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Bash script to automatically configure Ubuntu machine to requirements
+apt-get update
+apt-get -y install nginx
+service nginx start
+echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
+string="location /redirect_me {\n\t\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\t}"
+sed -i "/#error_page 404 \/404.html;/ a\\$string" /etc/nginx/sites-available/default
+service nginx reload
+service nginx restart
