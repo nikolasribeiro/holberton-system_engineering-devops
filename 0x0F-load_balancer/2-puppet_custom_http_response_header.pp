@@ -7,7 +7,7 @@ package { 'nginx':
   ensure  => installed,
   require => Exec['apt-get-update'],
 }
- 
+
 file_line { 'a':
   ensure  => 'present',
   path    => '/etc/nginx/sites-available/default',
