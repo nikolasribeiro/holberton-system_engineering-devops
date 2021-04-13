@@ -1,24 +1,33 @@
 #!/usr/bin/env bash
-# Bash script to install HAProxy load balancer
-echo deb http://archive.ubuntu.com/ubuntu trusty-backports main universe | \
-      tee /etc/apt/sources.list.d/backports.list
-sudo apt-get update
-sudo apt-get install haproxy -t trusty-backports
+# Installs Nginx:
 
-PATTERN="^ENABLED=0$"
-REPLACE="ENABLED=1"
-sudo cp /etc/default/haproxy /etc/default/haproxy_cp
-sudo sed -i "s/$PATTERN/$STRING/g" /etc/default/haproxy_cp
-sudo service haproxy
+apt-get update
+apt-get install -y nginx
 
-sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg_cp
-SERVER1="listen backend *:80\n\t\n\tmode http\n\tstats enable\n\tbalance roundrobin\n\tserver 137-web-01 66.70.184.249:80 check"
-sudo echo $SERVER1
-SERVER2="\n\tbalance roundrobin\n\tserver 137-web-02 54.210.138.75:80 check"
-sudo sed -i "/$SERVER/a \$SERVER2" /etc/haproxy/haproxy.cfg_cp
-sudo service haproxy
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Holberton School" > /etc/nginx/html/index.html
+touch /etc/nginx/html/404.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
-sudo mv /etc/default/haproxy_cp /etc/default/haproxy
-sudo mv /etc/haproxy/haproxy.cfg_cp /etc/haproxy/haproxy.cfg
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    add_header X-Served-By $HOSTNAME;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
+    }
+    error_page 404 /404.html;
+    location /404 {
+      root /etc/nginx/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
 
-sudo service haproxy start
+service nginx restart
+# another way for the second part:
+# sudo sed -i '/server_name _/a rewrite ^/redirect_me/ https://www.youtube.com/watch?v=QH2-TGUlwu4/$1 permanent;\n' /etc/nginx/sites-available/default
+# sudo sed -i '/server_name _/a error_page 404 /new_404.html; \nlocation = /new_404.html \n{\nroot /var/www/html/;\ninternal; \n}' /etc/nginx/sites-available/default
+# sudo sed -i '/# First attempt to serve request as file, then/a add_header X-Served-By $hostname;\n' /etc/nginx/sites-available/default
