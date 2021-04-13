@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Bash script to install HAProxy load balancer
+echo deb http://archive.ubuntu.com/ubuntu trusty-backports main universe | \
+      tee /etc/apt/sources.list.d/backports.list
+sudo apt-get update
+sudo apt-get install haproxy -t trusty-backports
+
+PATTERN="^ENABLED=0$"
+REPLACE="ENABLED=1"
+sudo cp /etc/default/haproxy /etc/default/haproxy_cp
+sudo sed -i "s/$PATTERN/$STRING/g" /etc/default/haproxy_cp
+sudo service haproxy
+
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg_cp
+SERVER1="listen backend *:80\n\t\n\tmode http\n\tstats enable\n\tbalance roundrobin\n\tserver 137-web-01 66.70.184.249:80 check"
+sudo echo $SERVER1
+SERVER2="\n\tbalance roundrobin\n\tserver 137-web-02 54.210.138.75:80 check"
+sudo sed -i "/$SERVER/a \$SERVER2" /etc/haproxy/haproxy.cfg_cp
+sudo service haproxy
+
+sudo mv /etc/default/haproxy_cp /etc/default/haproxy
+sudo mv /etc/haproxy/haproxy.cfg_cp /etc/haproxy/haproxy.cfg
+
+sudo service haproxy start
