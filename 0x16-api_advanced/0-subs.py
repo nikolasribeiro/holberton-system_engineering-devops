@@ -9,9 +9,9 @@ import requests
 
 def number_of_subscribers(subreddit):
     """
-        Method to return number of subscribers per subreddit
-        subreddit: argument being passed in
-        return: number of subscribers in the subreddit
+    Method to return number of subscribers per subreddit
+    subreddit: argument being passed in
+    return: number of subscribers in the subreddit
     """
     reddit_url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {"User-Agent": "Holberton API access v0.1 (by /u/holbie)"}

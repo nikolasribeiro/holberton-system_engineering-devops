@@ -8,7 +8,7 @@ import requests
 
 def top_ten(subreddit):
     """
-        Method that prints the title of the first 10 hop posts for a subreddit
+    Method that prints the title of the first 10 hop posts for a subreddit
     """
     reddit_url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {"User-Agent": "Holberton API access v0.1 (by /u/holbie)"}
